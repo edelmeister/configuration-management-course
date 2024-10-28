@@ -46,26 +46,29 @@ As mentioned previously, the five most important Salt State functions are pkg, f
 
 Running the command `sudo salt-call --local -l info state.single pkg.installed tree` runs a state function that checks if `tree` is installed, and if not, installs it. `salt-call` is used to run commands locally on a minion, and `--local` says not to contact a master for instructions. `-l info` says to show info-level logging in the terminal. `state.single` is used to execute a single state function instead of `state.apply`, which reads a state file for instructions. Finally `pkg.installed` executes the State Function `installed` in the `pkg` module. `pkg.removed` removes a package. [9]
 
-![[h1-1.png]]
+![h1-1.png](/H1/h1-1.png)
+
 The above image demonstrates running a state function. It checked that `tree` was installed, and as a result did nothing. The desired state has already been achieved. Signified by the `Succeeded: 1`.
 
 `file.managed` makes sure that a specific file is on the system, and if not, downloads it from the master. `file.absent` deletes a specific file if it exists. [9]
 
-![[h1-2.png]]
+![h1-2.png](/H1/h1-2.png)
+
 Salt checked if `/tmp/testing.txt` existed, and because it didn't, it created it. Next to the `Succeeded: 1` there is a `(changed=1)` which signifies this fact.
 
 `service.running` makes sure that a daemon is running, and runs it if it's not. `service.dead` does the opposite. If you add the argument `enable=True` it also enables the daemon at system startup. `enable=False` disables the daemon from running at system startup. [9]
 
-![[h1-3.png]]
+![h1-3.png](/H1/h1-3.png)
 
 `user.present` makes sure that a specified user exists on the system, and adds it if it doesn't. `user.absent` does the opposite. [9]
 
-![[h1-4.png]]
+![h1-4.png](/H1/h1-4.png)
+
 In this example, I first created a new user called ``testinator``, and then used `user.absent testinator` to remove it.
 
 `cmd.run` runs a specified command if certain circumstances are met. For example: `cmd.run 'touch /tmp/test-file' creates="/tmp/test-file"` runs the command `touch /tmp/test-file` if the condition in `creates="/tmp/test-file` isn't met. In this case, if the file `test-file` doesn't exist in `/tmp`. [9]
 
-![[h1-5.png]]
+![h1-5.png](/H1/h1-5.png)
 
 ## d) Idempotence
 
@@ -73,21 +76,24 @@ Idempotent actions, in the case of Salt, when applied multiple times, don't chan
 
 To demonstrate this, I'll run a state function that makes sure `nethack-console` is installed.
 
-![[h1-6.png]]
+![h1-6.png](/H1/h1-6.png)
+
 Here Salt determined that `nethack-console` doesn't yet exist on the system, so it installed it. If I run the exact same command a second time:
 
-![[h1-7.png]]
+![h1-7.png](/H1/h1-7.png)
+
 We can see that Salt determined that `nethack-console` is already installed, and thus doesn't need to be installed again.
 
 ## e) Master-minion
 
 So far I've only run commands locally on the minion.  To test out Salt's master-minion architecture, I installed `salt-master` and configured the minion in `/etc/salt/minion` by adding the line `id: santeri-minion`, which gave the minion the name `santeri-minion`. After that I restarted `salt-minion`. Once restarted, the minion sent a key to the master. I then used the command `sudo salt-key -A` to see a list of unaccepted keys, and accepted the key from `santeri-minion`.
 
-![[h1-8.png]]
+![h1-8.png](/H1/h1-8.png)
 
 First testing `sudo salt '*' test.version` I got a timeout error. The problem stemmed from me configuring the minion incorrectly. I had not specified an IP address of the master. Even though the minion was able to send a key to the master without an address, it could not receive any commands from the master. After specifying the IP address of the master, the connection started working fine. I also tested allowing and denying traffic to ports 4505/tcp and 4506/tcp in the firewall, but it had no effect, probably because both master and minion are running on the same system.
 
-![[h1-9.png]]
+![h1-9.png](/H1/h1-9.png)
+
 Here I tested that a connection to the minion can be established, and that running a state function works as intended.
 
 ## Bibliography
