@@ -275,46 +275,35 @@ Molemmissa tapauksissa lopputulos on täsmälleen sama. Miten nämä eroavat toi
 ## Lähteet
 
 [1]
-
 T. Karvinen, “H2 Infra as Code - Palvelinten Hallinta - Configuration Management Systems Course - 2024 Autumn,” _Terokarvinen.com_, 2024. https://terokarvinen.com/palvelinten-hallinta/#h2-infra-as-code (accessed Nov. 11, 2024).
 
 [2]
-
 T. Karvinen, “Two Machine Virtual Network With Debian 11 Bullseye and Vagrant,” _Terokarvinen.com_, Nov. 04, 2021. https://terokarvinen.com/2021/two-machine-virtual-network-with-debian-11-bullseye-and-vagrant/ (accessed Nov. 11, 2024).
 
 [3]
-
 T. Karvinen, “Salt Quickstart - Salt Stack Master and Slave on Ubuntu Linux,” _Terokarvinen.com_, Mar. 28, 2018. https://terokarvinen.com/2018/03/28/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/ (accessed Nov. 11, 2024).
 
 [4]
-
 T. Karvinen, “Hello Salt Infra-as-Code,” _Terokarvinen.com_, Apr. 03, 2024. https://terokarvinen.com/2024/hello-salt-infra-as-code/ (accessed Nov. 11, 2024).
 
 [5]
-
 T. Karvinen, “Salt Vagrant - Automatically Provision One Master and Two Slaves,” _Terokarvinen.com_, 2014. https://terokarvinen.com/2023/salt-vagrant/#infra-as-code---your-wishes-as-a-text-file (accessed Mar. 28, 2023).
 
 [6]
-
 VMware Inc., “Salt Overview - Salt User Guide,” _Saltproject.io_, 2021. https://docs.saltproject.io/salt/user-guide/en/latest/topics/overview.html#rules-of-yaml (accessed Nov. 11, 2024).
 
 [7]
-
 HashiCorp, “Install | Vagrant | HashiCorp Developer,” _Install | Vagrant | HashiCorp Developer_, 2024. https://developer.hashicorp.com/vagrant/install (accessed Nov. 11, 2024).
 
 [8]
-
 HashiCorp, “Quick Start | Vagrant | HashiCorp Developer,” _Quick Start | Vagrant | HashiCorp Developer_, 2024. https://developer.hashicorp.com/vagrant/tutorials/getting-started (accessed Nov. 12, 2024).
 
 [9]
-
 HashiCorp, “Multi-Machine | Vagrant | HashiCorp Developer,” _Multi-Machine | Vagrant | HashiCorp Developer_, 2024. https://developer.hashicorp.com/vagrant/docs/multi-machine (accessed Nov. 12, 2024).
 
 [10]
-
 VMware Inc., “Bootstrap Installation - Salt Install Guide,” _Saltproject.io_, 2024. https://docs.saltproject.io/salt/install-guide/en/latest/topics/bootstrap.html (accessed Nov. 12, 2024).
 
 [11]
-
 VMware Inc., “Salt States - Salt User Guide,” _Saltproject.io_, 2021. https://docs.saltproject.io/salt/user-guide/en/latest/topics/states.html (accessed Nov. 12, 2024).
 
