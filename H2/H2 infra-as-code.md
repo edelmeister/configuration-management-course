@@ -25,7 +25,7 @@ Salt:in tilatiedostot kirjoitetaan YAML-kielellä. Data muodostuu ``key:value``-
 
 Asensin Vagrant:in Windows 11 tietokoneelleni asennustiedoston avulla [7]. Asennuksen jälkeen tietokone piti käynnistää uudelleen. VirtualBox oli jo ennestään asennettu. 
 
-![[h2-01.png]]
+![](h2-01.png)
 
 ## b) Linux Vagrant
 
@@ -33,11 +33,11 @@ Loin ensimmäisen Linux-virtuaalikoneen Vagrant:illa seuraamalla [8].
 
 Aloitin luomalla uuden projektikansion komennolla ``mkdir vagrant-project`` ja siirtymällä siihen. Projektikansiossa ajoin komennon ``vagrant init hashicorp/bionic64``, joka loi Vagrantfile-konfigurointitiedoston ja kertoo Vagrant:ia käyttämään virtuaalikoneissa ``hashicorp/bionic64`` virtuaalikoneboksia. Lopuksi käynnistin Vagrant:in komennolla ``vagrant up``, joka loi virtuaalikoneen.
 
-![[h2-02.png]]
+![](h2-02.png)
 
 Testasin, että virtuaalikone toimii yhdistämällä siihen komennolla ``vagrant ssh``.
 
-![[h2-03.png]]
+![](h2-03.png)
 
 Tämän jälkeen kirjauduin virtuaalikoneesta ulos ja tuhosin sen komennolla ``vagrant destroy``.
 
@@ -72,11 +72,11 @@ Käynnistäessäni koneet komennolla ``vagrant up``, törmäsin ensin ongelmaan,
 
 Testasin, että koneet toimivat ja saivat toisiinsa yhteyden:
 
-![[h2-05.png]]
+![](h2-05.png)
 
 Myös kone002:sta yhteydet toimi:
 
-![[h2-06.png]]
+![](h2-06.png)
 
 Lopuksi taas tuhosin koneet.
 
@@ -190,7 +190,7 @@ end
 
 Koneiden käynnistyttyä otin yhteyden kone001 ja hyväksyin kone002:n lähettämän minion-avaimen, sekä testasin, että Minion:in komentaminen toimii.
 
-![[h2-07.png]]
+![](h2-07.png)
 
 ## e) Hei infrakoodi!
 
@@ -205,13 +205,13 @@ Koneella kone001 tein uuden hakemiston Salt:in tilatiedostoille komennolla ``sud
 
 Kun tämä ajetaan paikallisesti komennolla ``sudo salt-call --local state.apply hello``, se luo tiedoston ``hello-salt``.
 
-![[h2-08.png]]
+![](h2-08.png)
 
 ## f) "Hei infrakoodi!" Minion:ille
 
 Ajoin saman tilatiedoston Minion:ille eli kone002:lle.
 
-![[h2-09.png]]
+![](h2-09.png)
 
 ## g) Useampi tilafunktio
 
@@ -230,11 +230,11 @@ nethack-console:
 
 Tilatiedosto varmistaa, että ``vim`` on asennettu, ``sshd`` on päällä, ja että ``/tmp/tiedosto`` on olemassa. Ajoin sen paikallisesti komennolla ``sudo salt-call --local state.apply sovelluksia``. Tämän tuloksena tiedosto luotiin ja ``nethack-console`` asennettiin:
 
-![[h2-10.png]]
+![](h2-10.png)
 
 Tarkistin, että tiedosto todella luotiin ja ``nethack-console`` asennettiin:
 
-![[h2-11.png]]
+![](h2-11.png)
 
 ## e) top.sls
 
@@ -249,7 +249,7 @@ base:
 
 Lopuksi ajoin kaikki luomani moduulit paikallisesti komennolla ``sudo salt-call --local state.apply``, joka lukee ``top.sls``-tiedoston ja ajaa tilatiedostot.
 
-![[h2-12.png]]
+![](h2-12.png)
 
 Huomaamme, että kaikki tilatiedostojen tilat olivat jo täyttyneet. Tämä osoittaa samalla miten Salt:in komennot ovat idempotentteja.
 
