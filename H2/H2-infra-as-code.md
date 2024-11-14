@@ -188,6 +188,8 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+*Lisäys 14.11.2024:* ``service ... restart`` sijaan käytetään nykyään ``systemctl restart ...``.
+
 Koneiden käynnistyttyä otin yhteyden kone001 ja hyväksyin kone002:n lähettämän minion-avaimen, sekä testasin, että Minion:in komentaminen toimii.
 
 ![](h2-07.png)
@@ -272,6 +274,8 @@ install_nethack:
 
 Molemmissa tapauksissa lopputulos on täsmälleen sama. Miten nämä eroavat toisistaan? Mikä on oikeaoppinen tapa kirjoittaa tilatiedostoja?
 
+*Lisäys 14.11.2024:* Karvinen luennossaan [12] suosittelee käytettäväksi ylempää vaihtoehtoa tässä tilanteessa.
+
 ## Lähteet
 
 [1]
@@ -306,4 +310,7 @@ VMware Inc., “Bootstrap Installation - Salt Install Guide,” _Saltproject.io_
 
 [11]
 VMware Inc., “Salt States - Salt User Guide,” _Saltproject.io_, 2021. https://docs.saltproject.io/salt/user-guide/en/latest/topics/states.html (accessed Nov. 12, 2024).
+
+[12]
+T. Karvinen, “Luento - Palvelinten Hallinta ICI001AS3A-3010,” Haaga-Helia, Nov. 14, 2024.
 
