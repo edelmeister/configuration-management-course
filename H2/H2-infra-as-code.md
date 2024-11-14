@@ -236,7 +236,7 @@ Tarkistin, että tiedosto todella luotiin ja ``nethack-console`` asennettiin:
 
 ![](h2-11.png)
 
-## e) top.sls
+## h) top.sls
 
 Ohjetta [5] avuksi käyttäen loin ``top.sls``-tiedoston hakemistoon ``/srv/salt``, joka ajaa moduulit ``hello`` ja ``sovelluksia``:
 
