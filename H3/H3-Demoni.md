@@ -30,7 +30,72 @@ Ohje [[2]](#lähdeluettelo) näyttää lyhyesti Salt-tilatiedoston ``sshd.sls``,
 
 ## a) Apache easy mode
 
+Tämän kerran seikkailut alkoivat hauskalla yllärillä, kun ``vagrant up`` komennon seurauksena Windows 11 -koneeni heitti siniset veivit, viimeisinä sanoinaan: ``Stop code: DRIVER_IRQL_NOT_LESS_OR_EQUAL. What failed: VMMR0.r0``.
 
+![BSOD](imgs/h3-01.jpg)
+
+Veikkaukseni oli, että joko Vagrant tai VirtualBox on tähän syyllinen. Asensin ensin Vagrant:in uudelleen, mutta BSOD jatkui. Seuraavaksi latasin VirtualBox:in uusimman version ja asensin sen. Tämän jälkeen virtualisointi toimi kiltisti ja moitteetta. Myös "``VMMR0.r0``" viittaisi virtuaalikoneen olleen ongelma.
+
+Käytän tässä tehtävässä kahta virtuaalikonetta, jotka loin Vagrant:illa hyödyntämällä H2-tehtävässä kirjoittamaani Vagrantfile-tiedostoa [[6]](https://github.com/edelmeister/configuration-management-course/blob/main/H2/H2-infra-as-code.md#d-master-minion-verkossa).
+
+Ajoin kone001:llä komennon ``sudo salt-call --local state.single pkg.installed apache2``, joka asensi koneelle ``apache2``:n. Komennolla ``sudo salt-call --local state.single service.running apache2`` varmistin, että kyseinen demoni käynnistyi.
+
+![Apache2 running.](imgs/h3-02.png)
+
+Tarkistin lisäksi, että Salt ei valehtele komennolla ``systemctl status apache2``. Apache2 näyttäisi siis toimivan.
+
+![Apache2 is really runnning.](imgs/h3-03.png)
+
+Lisäksi testasin, että pystyn yhdistämään Apache2-palvelimelle menemällä host-koneeni selaimella osoitteeseen ``http://192.168.12.11``. Apache2:n oletussivu näkyi, joten yhteys toimi.
+
+Seuraavaksi siirryin hakemistoon ``/var/www/html`` ja tein Apache2:n oletussivusta kopion. Sitten loin uuden ``index.html``-tiedoston, johon kirjoitin:
+
+```HTML
+<h1> MINUN VERKKOSIVU </h1>
+<p> Tämä on Apache2-verkkosivupalvelin.</p>
+```
+
+Käynnistin palvelimen uudelleen komennolla ``sudo systemctl restart apache2``, virkistin selaimen ikkunan, ja ihailin uutta verkkosivuani.
+
+![Uusi verkkosivu.](imgs/h3-04.png)
+
+Sitten koitti aika automoida kyseisen verkkosivupalvelimen luonti kone002:lle Salt:illa.
+
+Kirjoitin uuden Salt moduulin ``apache2`` tilatiedoston ``/srv/salt/apache2/init.sls``, joka asentaa Apache2:n, varmistaa, että se on päällä, sekä kopioi master:ilta (kone001) HTML-tiedoston. Tähän apuna käytin Karvisen tilatiedostoa ohjeessa [[2]](#lähdeluettelo). Loin lisäksi moduulin kansioon symbolisen linkin ``index.html``, joka osoittaa master:in tiedostoon ``/var/www/html/index.html``.
+
+```YAML
+apache2:
+  pkg.installed
+/var/www/html/index.html:
+  file.managed:
+    - source: salt://apache2/index.html
+apache2:
+  service.running
+```
+
+Yritin suorittaa tilatiedostoa komennolla ``sudo salt '*' state.apply apache2``, mutta Salt sylki virheilmoituksen:
+
+![Virheilmoitus.](imgs/h3-05.png)
+
+Tarkistin tiedoston kirjoitusvirheiltä ja pähkäilin asiaa tovin, mutten saanut sitä ratkaistua. Lopulta annoin ruutukaappauksen virhekoodista GPT-4o:lle ja kysyin mikä mahtaisi olla vikana. GPT-4o:n mukaan ongelma saattaa olla siinä, että ``init.sls``-tiedostossa on kaksi tilaa, joilla on sama ID, joka tässä tapauksessa on ``apache2:``. Muistin, että komennossa ``systemctl restart apache2`` ja ``...apache2.service`` ajavat samaa asiaa, joten nimesin tilatiedoston jälkimmäisen tilan ``apache2.service``.
+
+```YAML
+apache2:
+  pkg.installed
+/var/www/html/index.html:
+  file.managed:
+    - source: salt://apache2/index.html
+apache2.service:
+  service.running
+```
+
+Tämän jälkeen ajoin komennon ``sudo salt '*' state.apply apache2`` uudelleen, ja tällä kertaa komennot suorituivat onnistuneesti.
+
+![Onnistunut tila.](imgs/h3-06.png)
+
+Lisäksi pystyin host-koneella selaamaan sivulle ``http://192.168.12.12`` (kone002:n IP-osoite), jossa näkyi tekemäni HTML-sivu.
+
+![Uusi HTML-sivu näkyy myös minion:illa.](imgs/h3-07.png)
 
 ## b) SSHouto
 
@@ -54,3 +119,6 @@ VMware Inc., “salt.states.file,” Saltproject.io, Oct. 23, 2023. https://docs
 
 [5]
 VMware Inc., “salt.states.service,” Saltproject.io, Oct. 23, 2023. https://docs.saltproject.io/en/latest/ref/states/all/salt.states.service.html (accessed Nov. 18, 2024).
+
+[6]
+S. Edelmann, “Kotitehtäväraportti H2 Infra-as-Code - d) Master-Minion verkossa,” GitHub, Nov. 12, 2024. https://github.com/edelmeister/configuration-management-course/blob/main/H2/H2-infra-as-code.md#d-master-minion-verkossa (accessed Nov. 18, 2024).
