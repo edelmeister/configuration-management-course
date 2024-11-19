@@ -99,9 +99,75 @@ Lisäksi pystyin host-koneella selaamaan sivulle ``http://192.168.12.12`` (kone0
 
 ## b) SSHouto
 
+Tämän osan tavoite on luoda Salt-moduli, joka varmistaa, että minion:issa on SSHd asennettu ja päällä, ja se kuuntelee kahdessa eri portissa. Avuksi käytin ohjetta [[2]](#lähdeluettelo).
+
+Loin ensin uuden hakemiston ``sshd`` master:in (kone001) Salt-hakemistoon, jonka sisälle tein uuden ``init.sls`` tiedoston. Tämä on muokattu Karvisen tilatiedoston [[2]](#lähdeluettelo) pohjalta.
+
+```YAML
+# /srv/salt/sshd/init.sls
+openssh-server:
+ pkg.installed
+/etc/ssh/sshd_config:
+ file.managed:
+   - source: salt://sshd/sshd_config
+sshd:
+ service.running:
+   - watch:
+     - file: /etc/ssh/sshd_config
+```
+
+Sen jälkeen kopioin ``/etc/ssh/sshd_config``-tiedoston ``sshd``-modulin hakemistoon. Muokkasin sitä lisäämällä rivit:
+
+    Port 22
+    Port 1234
+
+Lopulta ajoin ``sudo salt '*' state.apply sshd``, ja lopputulos onnistui.
+
+![SSHd:n tilatiedosto toimii.](imgs/h3-08.png)
+
+Yritin yhdistää minion:iin master:ilta komennolla ``ssh -p 1234 vagrant@192.168.12.12``, mutta sain virheilmoituksen "Permission denied (public key)". Yritin sitten tehdä minion:ille uuden käyttäjän komennolla ``sudo salt '*' state.single user.present test-user``, joka teki uuden käyttäjän, mutta myös yhdistäminen komennolla ``ssh -p 1234 test-user@192.168.12.12`` myös epäonnistui samasta syystä. Tämä viittaisi siihen, että yhdistäminen vaatii avaimen. Tarkistin host-koneella Vagrant:in SSH-konfiguraatiot, josta selvisi, että Vagrant vaatii IdentityFile-tiedoston ``private-key`` SSH-yhteyteen. Kokeilin host koneelta SSH-yhteyttä niin, että kerron mistä tuo avain löytyy, eli komennolla ``ssh -i .\vagrant\machines\kone002\virtualbox\private_key -p 1234 vagrant@192.168.12.12``, ja tämä toimi, joten ainakin uuden portin lisääminen oli onnistunut. Yhdistäminen ``test-user``-käyttäjänä ei kuitenkaan onnistunut, koska avain on sille väärä.
+
+Kysyn Karviselta seuraavalla luennolla, miten SSH-yhteydet kannattaa Vagrant:illa luotujen virtuaalikoneiden välillä määrittää.
+
+Lopuksi testasin vielä kone001:llä komennolla ``nc -vz 192.168.12.12 1234``, että ``sshd_config``:in mukaiseen porttiin saa yhteyden.
+
+![nc](imgs/h3-09.png)
+
 ## c) Oma moduli
 
+Tässä osiossa kuvailen, millaisen oman modulin haluaisin myöhemmin kurssilla rakentaa.
+
+Ideani on luoda Minecraft-pelipalvelinmoduli. Sen tavoite olisi automaattisest luoda kohde-minion:ille toimiva Minecraft-palvelin. Moduli asentaisi minion:ille ``minecraft-server``:in, loisi sille tarvittavat konfiguraatiot, sekä varmistaisi, että se pysyy päällä. Pelaajien edistyminen tallentuu palvelimen tietoihin, joten on myös tärkeää, että moduli suorittaa myös tarvittavat varmuuskopiot. Tämän lisäksi moduli voisi myös päivittää palvelinohjelman automaattisesti heti, kun sellainen on saatavilla, jotta pelaajien ``minecraft-client``, joka päivittyy automaattisesti, ei ole epäsuhdassa palvelimen version kanssa.
+
+Moduli voisi toimia niin, että se lataa kaikki tarvittavat tiedostot master:ille, joka sitten jakelee ne minion:ille.
+
+Odotan, että haasteita syntyy ainakin automaattisten varmuuskopioiden kanssa, koska emme ole kurssilla vielä käsitelleet liikennettä minion:ilta master:ille.
+
 ## d) VirtualHost
+
+Tässä osiossa muokkaan [a) kohdan](#a-apache-easy-mode) tehtävää niin, että Apache tarjoilee HTML-tiedoston normaalin käyttäjän kotihakemistosta minion:in etusivulle. Sen täytyy myös olla muokattavissa normaalin käyttäjän oikeuksin.
+
+Tein kone002:lle (minion:ille) uuden normaalin käyttäjän komennolla ``sudo adduser normaali``. Kirjauduin sille komennolla ``su - normaali`` ja tein käyttäjän kotihakemistoon tiedoston ``index.html``. Sitten kirjauduin ulos ja takaisin master:ille.
+
+Muokkasin sitten tilatiedostoa ``/srv/salt/apache2/init.sls`` niin, että se hakee HTML-tiedoston käyttäjän ``normaali`` kotihakemistosta. Sitten ajoin tutun ``sudo salt '*' state.apply apache2``.
+
+![Onnistunut Salt-komento.](imgs/h3-10.png)
+
+Testasin myös, että sivu näkyy kone002:n etusivulla.
+
+![Sivu näkyy selaimessa.](imgs/h3-11.png)
+
+Testasin, että ajamani komento on idempotentti ajamalla sen pari kertaa uudelleen. Tuloksena oli, että mikään ei muuttunut, joten idempotenttius oli saavutettu. Sitten kirjauduin taas kone002:lle normaali-käyttäjänä, ja muokkasin kotihakemistossa olevaa HTML-tiedostoa Nano:lla lisäämällä rivin:
+
+    <p>Tätä sivua on muutettu.</p>
+
+Sen jälkeen ajoin taas master:illa komennon ``sudo salt '*' state.apply apache2``.
+
+![Tilojen muutokset.](imgs/h3-12.png)
+
+Muutokset näkyvät myös selaimessa.
+
+![Muutokset näkyvät selaimessa.](imgs/h3-13.png)
 
 ## Lähdeluettelo
 
