@@ -96,94 +96,49 @@ Lopullinen Vagrantfile:
 
 ```ruby
 # -*- mode: ruby -*-
-
 # vi: set ft=ruby :
 
-  
-
 $master = <<MASTER
-
 echo "Downloading Salt bootstrap script."
-
 curl -o bootstrap-salt.sh -L https://github.com/saltstack/salt-bootstrap/releases/latest/download/bootstrap-salt.sh
-
 echo "Making the script executable."
-
 chmod +x bootstrap-salt.sh
-
 echo "Launching bootstrap script to install salt-master."
-
 sudo ./bootstrap-salt.sh -M stable
-
 echo "Restarting salt-master."
-
 sudo service salt-master restart
-
 echo "Setup done."
-
 MASTER
 
-  
-
 $minion = <<MINION
-
 echo "Downloading Salt bootstrap script."
-
 curl -o bootstrap-salt.sh -L https://github.com/saltstack/salt-bootstrap/releases/latest/download/bootstrap-salt.sh
-
 echo "Making the script executable."
-
 chmod +x bootstrap-salt.sh
-
 echo "Launching bootstrap script to install salt-minion."
-
 sudo ./bootstrap-salt.sh stable
-
 echo "Setting the address of salt-master."
-
 echo "master: 192.168.12.11">/etc/salt/minion
-
 echo "Restarting salt-master."
-
 sudo service salt-minion restart
-
 echo "Setup done."
-
 MINION
-
-  
 
 Vagrant.configure("2") do |config|
 
-  
-
   config.vm.box = "ubuntu/jammy64"
 
-  
-
   config.vm.define "kone001", primary: true do |kone001|
-
     kone001.vm.provision :shell, inline: $master
-
     kone001.vm.network "private_network", ip: "192.168.12.11"
-
     kone001.vm.hostname = "kone001"
-
   end
-
-  
 
   config.vm.define "kone002" do |kone002|
-
     kone002.vm.provision :shell, inline: $minion
-
     kone002.vm.network "private_network", ip: "192.168.12.12"
-
     kone002.vm.hostname = "kone002"
-
   end
-
-  
 
 end
 ```
