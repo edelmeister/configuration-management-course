@@ -12,3 +12,5 @@ The first report is in English, but the rest are in Finnish, as the course langu
 [H2 infra-as-code](H2/H2-infra-as-code.md)
 
 [H3 Demoni](H3/H3-Demoni.md)
+
+[H4 Puolikas](H4/H4-Puolikas.md)
