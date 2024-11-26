@@ -4,16 +4,16 @@ Tehtäväraportti tehtävälle [H4 Puolikas](https://terokarvinen.com/palvelinte
 
 ## Sisällysluettelo
 
-[1. Johdanto](#1-johdanto)
-    [1.1. Alusta](#11-alusta)
-    [1.2. Vaatimukset](#12-vaatimukset)
-    [1.3. Huomioita](#13-huomioita)
-[2. Virtuaalikoneiden luonti](#2-virtuaalikoneiden-luonti)
-[3. Minecraft-palvelimen asennus käsin](#3-minecraft-palvelimen-asennus-käsin)
-    [3.1. Järjestelmäkäyttäjänä](#31-järjestelmäkäyttäjänä)
-[4. Minecraft-Salt -moduuli](#4-minecraft-salt-moduuli)
-    [4.1. minecraft.service](#41-minecraftservice)
-    [4.2. Automatisointi](#42-automatisointi)
+- [1. Johdanto](#1-johdanto)
+    - [1.1. Alusta](#11-alusta)
+    - [1.2. Vaatimukset](#12-vaatimukset)
+    - [1.3. Huomioita](#13-huomioita)
+- [2. Virtuaalikoneiden luonti](#2-virtuaalikoneiden-luonti)
+- [3. Minecraft-palvelimen asennus käsin](#3-minecraft-palvelimen-asennus-käsin)
+    - [3.1. Järjestelmäkäyttäjänä](#31-järjestelmäkäyttäjänä)
+- [4. Minecraft-Salt -moduuli](#4-minecraft-salt-moduuli)
+    - [4.1. minecraft.service](#41-minecraftservice)
+    - [4.2. Automatisointi](#42-automatisointi)
 
 
 ## 1. Johdanto
