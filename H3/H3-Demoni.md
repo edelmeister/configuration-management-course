@@ -97,6 +97,8 @@ Lisäksi pystyin host-koneella selaamaan sivulle ``http://192.168.12.12`` (kone0
 
 ![Uusi HTML-sivu näkyy myös minion:illa.](imgs/h3-07.png)
 
+_Lisäys 26.11.2024:_ Tehtävän ohjeistus oli tehdä automoidut vaiheet ensin "käsin", eli käyttää normaaleja Linux-komentoja Salt:in sijaan. Käytin alussa Salt:in paikallisia komentoja yksitellen, mutta tämä on väärin. Jatkossa, kun pyydetään tekemään "käsin" ensin, teen vaiheet ilman Salt:ia.
+
 ## b) SSHouto
 
 Tämän osan tavoite on luoda Salt-moduli, joka varmistaa, että minion:issa on SSHd asennettu ja päällä, ja se kuuntelee kahdessa eri portissa. Avuksi käytin ohjetta [[2]](#lähdeluettelo).
@@ -168,6 +170,8 @@ Sen jälkeen ajoin taas master:illa komennon ``sudo salt '*' state.apply apache2
 Muutokset näkyvät myös selaimessa.
 
 ![Muutokset näkyvät selaimessa.](imgs/h3-13.png)
+
+_Lisäys 26.11.2024:_ Palaute tehtävään opetti, että Apache:n-userdir moduulilla voidaan tarjoilla sivu normaalin käyttäjän kotihakemistosta.
 
 ## Lähdeluettelo
 
