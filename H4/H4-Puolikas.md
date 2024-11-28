@@ -219,6 +219,33 @@ Pääsin myös liittymään palvelimelle host-koneelta!
 
 Testasin myös idempotenttiyden ajamalla komennon ``sudo salt '*' state.apply minecraft-server`` useaan kertaan lopputuloksen muuttumatta.
 
+Lopullinen toimiva tilatiedosto ``/srv/salt/minecraft-server/init.sls``:
+
+```YAML
+openjdk-21-jdk-headless:
+  pkg.installed
+minecraft:
+  user.present:
+    - system: True
+    - shell: /bin/bash
+    - home: /home/minecraft
+    - usergroup: True
+/home/minecraft/server.jar:
+  file.managed:
+    - source:
+      - salt://minecraft-server/server.jar
+/home/minecraft/eula.txt:
+  file.managed:
+    - source:
+      - salt://minecraft-server/eula.txt
+/etc/systemd/system/minecraft.service:
+  file.managed:
+    - source:
+      - salt://minecraft-server/minecraft.service
+minecraft.service:
+  service.running
+```
+
 ## 5. Seuraavat askeleet
 
 Tämä on vasta moduulini ensimmäinen versio. 
