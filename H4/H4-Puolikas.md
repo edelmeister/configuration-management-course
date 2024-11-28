@@ -233,6 +233,8 @@ Palvelin kaipaa myös whitelist-ominaisuuden käyttöönottoa, jotta ei-halutut 
 
 Tähän asti pääseminen oli kuitenkin jo suuri saavutus, ja olen lopputuloksesta hyvin tyytyväinen.
 
+_Lisäys 28.11.2024:_ Karvinen ehdotti luennolla [[9]](#lähdeluettelo), että varmuuskopiointiin voi käyttää ohjelmaa nimeltä Restic. Hänen mukaansa Saltin ``file.copy`` on suhteessa huono tapa tehdä varmuuskopiointeja, koska sen tietoturva on puuttellinen.
+
 ## Lähdeluettelo
 
 [1]
@@ -258,3 +260,6 @@ VMware Inc., “salt.states.user,” Saltproject.io, Oct. 23, 2023. https://docs
 
 [8]
 VMware Inc., “salt.states.file,” Saltproject.io, Oct. 23, 2023. https://docs.saltproject.io/en/latest/ref/states/all/salt.states.file.html#salt.states.file.managed (accessed Nov. 26, 2024).
+
+[9]
+T. Karvinen, “Luento - Palvelinten Hallinta ICI001AS3A-3010,” Haaga-Helia, Nov. 28, 2024.
