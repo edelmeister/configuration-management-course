@@ -14,6 +14,8 @@ Tehtäväraportti tehtävälle [H4 Puolikas](https://terokarvinen.com/palvelinte
 - [4. Minecraft-Salt -moduuli](#4-minecraft-salt-moduuli)
     - [4.1. minecraft.service](#41-minecraftservice)
     - [4.2. Automatisointi](#42-automatisointi)
+- [5. Seuraavat askeleet](#5-seuraavat-askeleet)
+- [Lähdeluettelo](#lähdeluettelo)
 
 
 ## 1. Johdanto
