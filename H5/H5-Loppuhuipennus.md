@@ -321,7 +321,25 @@ Muotoilen README-tiedoston niin, että sivulla on ensimmäisenä lyhyt kuvaus mo
 
 Minecraft-salt-module -projektin repositorio löytyy osoitteesta https://github.com/edelmeister/minecraft-salt-module [[12]](#lähdeluettelo)
 
-WIP
+Kirjoitin READMEn englanniksi, jotta moduulia voi käyttää mahdollisimman moni taustasta riippumatta.
+
+Aloitin lyhyellä osiolla, jossa kerroin kuka tämän on tehnyt ja mitä varten, sekä yhdellä lauseella tiivistettynä mitä tämä moduuli tekee.
+
+![intro](imgs/h5-19.png)
+
+Lisäsin myös havainnekuvan:
+
+![havainnekuva](imgs/h5-22.jpeg)
+
+Sen jälkeen selitän perusteellisemmin miten moduuliani käytetään ja mitä se asentaa. Pyrin myös linkittämään mahdollisimman paljon ulkoisia resursseja, joita käyttäjä voi hyödyntää riippuen omasta osaamistaustastaan.
+
+![usage](imgs/h5-20.png)
+
+Lopuksi kirjoitin asennusohjeet, joita seuraamalla moduulin saa käyttöönsä ja toimimaan riippumatta siitä, mitkä ovat käyttäjän lähtökohdat. Jaoin kohdat asennuksen vaiheet helposti seurattavaan numerojärjestykseen..
+
+Asennuksessa pyrin ketjuttamaan komentoja niin, että koko asennus on helppo tehdä muutamalla copy & paste -rituaalilla. Lisäsin ajettavat komennot omiin blokkeihinsa, jotta ne erottuu muusta tekstistä ja tekee kopioimisesta helpompaa.
+
+![installation](imgs/h5-21.png)
 
 ## Lähdeluettelo
 
