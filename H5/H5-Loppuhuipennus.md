@@ -380,8 +380,11 @@ GitHub, “About READMEs,” GitHub Docs. https://docs.github.com/en/repositorie
 [9]
 T. Karvinen, “Luento - Palvelinten Hallinta ICI001AS3A-3010,” Haaga-Helia, Nov. 28, 2024.
 
-[10]A. Ollornwi, “How to Use Git Submodules – Explained with Examples,” freeCodeCamp.org, May 07, 2024. https://www.freecodecamp.org/news/how-to-use-git-submodules/ (accessed Dec. 03, 2024).
+[10]
+A. Ollornwi, “How to Use Git Submodules – Explained with Examples,” freeCodeCamp.org, May 07, 2024. https://www.freecodecamp.org/news/how-to-use-git-submodules/ (accessed Dec. 03, 2024).
 
-[11]L. Torvalds and J. C. Hamano, “Git - git-clone Documentation,” git-scm.com. https://git-scm.com/docs/git-clone (accessed Dec. 04, 2024).
+[11]
+L. Torvalds and J. C. Hamano, “Git - git-clone Documentation,” git-scm.com. https://git-scm.com/docs/git-clone (accessed Dec. 04, 2024).
 
-[12]S. Edelmann, “Minecraft-Salt-Module,” GitHub, Dec. 03, 2024. https://github.com/edelmeister/minecraft-salt-module (accessed Dec. 04, 2024).
+[12]
+S. Edelmann, “Minecraft-Salt-Module,” GitHub, Dec. 03, 2024. https://github.com/edelmeister/minecraft-salt-module (accessed Dec. 04, 2024).
