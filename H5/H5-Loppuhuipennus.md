@@ -6,6 +6,16 @@ Tehtäväraportti tehtävälle [H5 Loppuhuipennus](https://terokarvinen.com/palv
 
 
 - [1. Johdanto](#1-johdanto)
+- [2. Oma miniprojekti (tehtävän kohta a)](#2-oma-miniprojekti-tehtävän-kohta-a)
+  - [2.1. Remote console](#21-remote-console)
+  - [2.2. minecraft.service](#22-minecraftservice)
+  - [2.3. Salt-moduulin päivitys](#23-salt-moduulin-päivitys)
+  - [2.4. Puhdas minioni](#24-puhdas-minion)
+  - [2.5. Moduuli on valmis](#25-moduuli-on-valmis)
+- [3. Moduulin etusivu (tehtävän kohta b)](#3-moduulin-etusivu-tehtävän-kohta-b)
+  - [3.1. Repositorion luominen](#31-repositorion-luominen)
+  - [3.2. Repositorion testaus](#32-repositorion-testaus)
+  - [3.3. READMEn kirjoitus](#33-readmen-kirjoitus)
 - [Lähdeluettelo](#lähdeluettelo)
 
 
@@ -315,7 +325,7 @@ Testasin vielä liittyä palvelimelle omalta Windows 11 -host-koneelta, joka toi
 
 ![minecraft toimii](imgs/h5-18.png)
 
-### 3.2. READMEn kirjoitus
+### 3.3. READMEn kirjoitus
 
 Muotoilen README-tiedoston niin, että sivulla on ensimmäisenä lyhyt kuvaus moduulista ja linkki READMEn asennusvaiheeseen. Asennusvaiheessa on tarkoitus antaa komennot ja toimet niin yksinkertaisina, kuin vain suinkin mahdollista, jonka vuoksi ketjutin aiemman testausvaiheen komentoja. Muuten struktuuri noudattaa Karvisen [[1]](#lähdeluettelo) ja GitHubin [[8]](#lähdeluettelo) ohjeita READMEn kirjoituksesta.
 
